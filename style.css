@@ -73,14 +73,30 @@ body {
 .img img {
 	max-width: calc(100vw - 48px);
 }
+#fav {
+	width: 24px;
+	height: 24px;
+	align-self: center;
+	margin-right: 8px;
+}
 #title {
-	font-weight: 600;
 	font-size: 20px;
 	background: var(--background-3);
 	border: 1px solid var(--border-1);
 	border-radius: 2px;
 	padding: 10px;
 	box-shadow: var(--box-shadow-2);
+	display: flex;
+}
+#title a {
+	color: var(--color-1);
+	font-weight: 600;
+	text-decoration: none;
+	margin-right: 6px;
+	transition: 0.2s;
+}
+#title a:hover {
+	font-weight: 700;
 }
 #pref-list {
 	background: var(--background-4);
