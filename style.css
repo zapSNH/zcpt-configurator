@@ -124,6 +124,7 @@ body {
 	box-shadow: var(--box-shadow-2);
 	margin-top: 8px;
 	flex: 2;
+	overflow: scroll;
 }
 .pref {
 	padding: 4px;
