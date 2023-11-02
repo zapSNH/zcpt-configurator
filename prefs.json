@@ -12,6 +12,7 @@
 		["uc.contextmenu.win-10",				[10, 0, [12, 13], [11], []]],
 		["uc.contextmenu.win-11",				[11, 0, [12, 13], [10], []]],
 		["uc.contextmenu.dark",	 				[12, 0, [], [13], []]],
-		["uc.contextmenu.light",				[13, 0, [], [12], []]]
+		["uc.contextmenu.light",				[13, 0, [], [12], []]],
+		["uc.newtab.background",				[14, 0, [], [], []]]
 	]
 }

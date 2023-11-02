@@ -100,6 +100,16 @@ body {
 #title a:hover {
 	font-weight: 700;
 }
+#includeInstallation {
+	background: var(--background-4);
+	border: 1px solid var(--border-1);
+	border-radius: 2px;
+	padding: 4px;
+	box-shadow: var(--box-shadow-2);
+	margin-top: 8px;
+	height: 40px;
+	padding-bottom: 1px;
+}
 #pref-list {
 	background: var(--background-4);
 	border: 1px solid var(--border-1);
@@ -119,11 +129,11 @@ body {
 .pref:nth-child(2n) {
 	background: var(--background-4);
 }
-:is(#export, .pref):hover {
+:is(#export, .pref, #includeInstallation button):hover {
 	box-shadow: var(--box-shadow-2);
 	z-index: 1;
 }
-:is(#export, .pref):active {
+:is(#export, .pref, #includeInstallation button):active {
 	box-shadow: var(--box-shadow-3);
 	translate: 0 2px;
 }
@@ -141,11 +151,44 @@ body {
 	padding: 8px;
 	font-size: 16px;
 	transition: 0.1s;
-	font-family: 'Segoe UI', 'Lato', Tahoma, Geneva, Verdana, sans-serif;
 	margin-top: 8px;
 	text-decoration: none;
 	text-align: center;
 }
 #export:hover:not(:active) {
 	background: #57abff;
+}
+#includeInstallation button {
+	border-radius: 2px;
+	border: none;
+	box-shadow: var(--box-shadow-2);
+	color: #eaeaea;
+	padding: 8px;
+	font-size: 16px;
+	transition: 0.1s;
+	text-decoration: none;
+	text-align: center;
+	font-family: 'Segoe UI', 'Lato', Tahoma, Geneva, Verdana, sans-serif;
+	display: flex;
+	font-weight: 600;
+}
+
+button #check {
+	opacity: 0;
+	scale: 0.5;
+	transition: 0.2s ease-in-out;
+	transform-origin: 50% 50%;
+	background: var(--background-4);
+}
+button.true #check {
+	opacity: 1;
+	scale: 1;
+}
+
+#check {
+	align-self: center;
+	margin-right: 8px;
+	margin-left: 2px;
+	border-radius: 2px;
+	box-shadow: var(--box-shadow-3);
 }

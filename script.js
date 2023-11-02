@@ -68,9 +68,22 @@ function toggle(index, requires=0, provides=[], negates=[], replaces=[]) {
 	}
 }
 
+function includeInstallation() {
+	if (!document.querySelector("#includeInstallation button").classList.contains("true")) {
+		document.querySelector("#includeInstallation button").classList.add("true");
+	} else {
+		document.querySelector("#includeInstallation button").classList.remove("true");
+	}
+}
+
 function exportPrefs() {
 	let exported = "// Put this in your profile folder and delete it after you start Firefox\n";
-	document.querySelectorAll(".true").forEach((e) => exported = exported.concat("user_pref(\"" + e.innerHTML + "\", true);\n"));
+
+	if (document.querySelector("#includeInstallation button").classList.contains("true")) {
+		exported = "// Put this in your profile folder and delete it after you start Firefox\nuser_pref(\"toolkit.legacyUserProfileCustomizations.stylesheets\", true);\nuser_pref(\"svg.context-properties.content.enabled\", true);\nuser_pref(\"layout.css.has-selector.enabled\", true);\nuser_pref(\"browser.newtabpage.activity-stream.logowordmark.alwaysVisible\", true);\n";
+	}
+
+	document.querySelectorAll(".true:not(button)").forEach((e) => exported = exported.concat("user_pref(\"" + e.innerHTML + "\", true);\n"));
 	console.log(exported);
 	document.querySelector("#export").href = "data:text/plain," + encodeURIComponent(exported);
 }
