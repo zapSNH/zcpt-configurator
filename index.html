@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Zap's Cool Photon Option Site</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="sidebar">
+		<div id="title" title="p.s. really horrible"><a href="https://github.com/zapSNH/zapsCoolPhotonTheme">zapSNH/zapsCoolPhotonTheme</a> Option Site</div>
+		<div id="pref-list">
+			<div class="pref" onclick="toggle(1,  0, [2], [3, 4, 5])">uc.bottom-tabs</div>
+			<div class="pref" onclick="toggle(2,  1, [], [3, 4, 5], [1])">uc.bottom-tabs.bookmark-on-top</div> 
+			<div class="pref" onclick="toggle(3,  0, [], [1, 2, 4, 5])">uc.sidebery</div>
+			<div class="pref" onclick="toggle(4,  0, [], [5, 3])">uc.titlebar-accent.darktext</div> 
+			<div class="pref" onclick="toggle(5,  0, [], [4, 3])">uc.titlebar-accent.lighttext</div>
+			<div class="pref" onclick="toggle(6,  0, [], [7])">uc.theme.tab-color-same-as-navbar</div>
+			<div class="pref" onclick="toggle(7,  0, [], [6])">uc.theme.navbar-color-same-as-tab</div>
+			<div class="pref" onclick="toggle(8,  0, [], [9])">uc.reduced-megabar</div>
+			<div class="pref" onclick="toggle(9,  0, [], [8])">uc.no-megabar</div>
+			<div class="pref" onclick="toggle(10, 0, [12, 13], [11])">uc.contextmenu.win-10</div>
+			<div class="pref" onclick="toggle(11, 0, [12, 13], [10])">uc.contextmenu.win-11</div>
+			<div class="pref" onclick="toggle(12, 0, [], [13])">uc.contextmenu.dark</div>
+			<div class="pref" onclick="toggle(13, 0, [], [12])">uc.contextmenu.light</div>
+		</div>
+		<button id="export" onclick="exportPrefs()">Export Options</button>
+	</div>
+	<div id="left"></div>
+	<script src="script.js"></script>
+</body>
+</html>

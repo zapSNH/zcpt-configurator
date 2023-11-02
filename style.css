@@ -1,0 +1,131 @@
+/* Zap's Cool Photon... Site! */
+:root {
+	--background-1: #f6f6f8;
+	--background-2: #fefefe;
+	--background-3: #e4e4e4;
+	--background-4: #eaeaea;
+	--background-5: #0a84ff66;
+
+	--color-1: #0a0a0a;
+
+	--border-1: #c0c0c0;
+
+	--box-shadow-1: 0 4px 12px #0005;
+	--box-shadow-2: 0 2px 6px #0003;
+	--box-shadow-3: 0 2px 4px #0001;
+}
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background-1: #0c0c0d;
+		--background-2: #323234;
+		--background-3: #4a4a4f;
+		--background-4: #444446;
+		--background-5: #0a84ffaa;
+	
+		--color-1: #fefefe;
+	
+		--border-1: #5a5a5c;
+	}
+}
+body {
+	background: var(--background-1);
+	color: var(--color-1);
+	margin: 0;
+	font-family: 'Segoe UI', 'Lato', Tahoma, Geneva, Verdana, sans-serif;
+	padding: 16px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-content: flex-start;
+	overflow: visible;
+}
+#sidebar {
+	display: flex;
+	flex-direction: column;
+	background: var(--background-2);
+	border: 1px solid var(--border-1);
+	border-radius: 4px;
+	padding: 12px;
+	box-shadow: var(--box-shadow-1);
+	width: min(500px, calc(100vw - 64px));
+	height: calc(100vh - 74px);
+	margin-right: 16px;
+	margin-bottom: 16px;
+}
+#left {
+	display: flex;
+	flex-direction: column;
+}
+
+/* ;( */
+.img {
+	background: var(--background-2);
+	border: 1px solid var(--border-1);
+	border-radius: 4px;
+	padding: 6px;
+	box-shadow: var(--box-shadow-1);
+	margin-bottom: 4px;
+	transition: 0.2s;
+}
+.img * {
+	display: block;
+}
+.img img {
+	max-width: calc(100vw - 48px);
+}
+#title {
+	font-weight: 600;
+	font-size: 20px;
+	background: var(--background-3);
+	border: 1px solid var(--border-1);
+	border-radius: 2px;
+	padding: 10px;
+	box-shadow: var(--box-shadow-2);
+}
+#pref-list {
+	background: var(--background-4);
+	border: 1px solid var(--border-1);
+	border-radius: 2px;
+	padding: 4px;
+	box-shadow: var(--box-shadow-2);
+	margin-top: 8px;
+	flex: 2;
+}
+.pref {
+	padding: 4px;
+	background: var(--background-3);
+	border-radius: 2px;
+	transition: 0.2s;
+	position: relative;
+}
+.pref:nth-child(2n) {
+	background: var(--background-4);
+}
+:is(#export, .pref):hover {
+	box-shadow: var(--box-shadow-2);
+	z-index: 1;
+}
+:is(#export, .pref):active {
+	box-shadow: var(--box-shadow-3);
+	translate: 0 2px;
+}
+.true {
+	background: var(--background-5) !important;
+	font-weight: 500;
+}
+
+#export {
+	border-radius: 2px;
+	background: #0a84ff;
+	border: none;
+	box-shadow: var(--box-shadow-2);
+	color: #eaeaea;
+	padding: 8px;
+	font-size: 16px;
+	transition: 0.1s;
+	font-family: 'Segoe UI', 'Lato', Tahoma, Geneva, Verdana, sans-serif;
+	margin-top: 8px;
+}
+#export:hover:not(:active) {
+	background: #57abff;
+}
