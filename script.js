@@ -87,3 +87,4 @@ async function load() {
 		document.querySelector("#pref-list").appendChild(prefRow);
 	}
 }
+load();
