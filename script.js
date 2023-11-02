@@ -72,6 +72,7 @@ function exportPrefs() {
 	let exported = "// Put this in your profile folder and delete it after you start Firefox\n";
 	document.querySelectorAll(".true").forEach((e) => exported = exported.concat("user_pref(\"" + e.innerHTML + "\", true);\n"));
 	console.log(exported);
+	document.querySelector("#export").href = "data:text/plain," + exported;
 }
 
 async function load() {
