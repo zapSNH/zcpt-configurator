@@ -125,6 +125,8 @@ body {
 	transition: 0.1s;
 	font-family: 'Segoe UI', 'Lato', Tahoma, Geneva, Verdana, sans-serif;
 	margin-top: 8px;
+	text-decoration: none;
+	text-align: center;
 }
 #export:hover:not(:active) {
 	background: #57abff;
