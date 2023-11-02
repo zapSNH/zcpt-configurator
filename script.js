@@ -73,3 +73,17 @@ function exportPrefs() {
 	document.querySelectorAll(".true").forEach((e) => exported = exported.concat("user_pref(\"" + e.innerHTML + "\", true);\n"));
 	console.log(exported);
 }
+
+async function load() {
+	const response = await fetch("prefs.json");
+	const data = await response.json();
+	
+	for (let e of data.prefs) {
+		let prefRow = document.createElement("div");
+		prefRow.classList.add("pref");
+		prefRow.innerHTML = e[0];
+		prefRow.setAttribute("onclick", "toggle(" + e[1][0] + ", [" + e[1][1] + "], [" + e[1][2] + "], [" + e[1][3] + "], [" + e[1][4] + "])");
+		console.log("toggle(" + e[1][0] + ", [" + e[1][1] + "], [" + e[1][2] + "], [" + e[1][3] + "], [" + e[1][4] + "])");
+		document.querySelector("#pref-list").appendChild(prefRow);
+	}
+}
