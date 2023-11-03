@@ -19,6 +19,7 @@ document.querySelector("#includeInstallation button").addEventListener("click", 
 
 document.querySelector("#clear").addEventListener("click", function () {
 	document.querySelectorAll(".true:not(button)").forEach((e) => e.classList.remove("true"));
+	document.querySelectorAll(".warning").forEach((e) => e.classList.remove("warning"));
 	document.querySelectorAll(".img").forEach((e) => e.remove());
 });
 
