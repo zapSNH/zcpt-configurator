@@ -126,6 +126,19 @@ body {
 	flex: 2;
 	overflow: scroll;
 }
+#description {
+	background: var(--background-4);
+	border: 1px solid var(--border-1);
+	border-radius: 2px;
+	padding: 4px;
+	box-shadow: var(--box-shadow-2);
+	margin-top: 8px;
+	height: 300px;
+	overflow: scroll;
+}
+#desc-box {
+	margin: 8px;
+}
 .pref {
 	padding: 4px;
 	background: var(--background-3);

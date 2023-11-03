@@ -91,6 +91,7 @@ function exportPrefs() {
 async function load() {
 	const response = await fetch("prefs.json");
 	const data = await response.json();
+	sessionStorage.setItem("data", data);
 	
 	for (let e of data.prefs) {
 		let prefRow = document.createElement("div");
