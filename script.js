@@ -91,9 +91,10 @@ function exportPrefs() {
 async function load() {
 	const response = await fetch("prefs.json");
 	const data = await response.json();
-	sessionStorage.setItem("desc", data.prefs[2]);
 	
 	for (let e of data.prefs) {
+		sessionStorage.setItem(e[0], e[2]);
+
 		let prefRow = document.createElement("div");
 		prefRow.classList.add("pref");
 		prefRow.innerHTML = e[0];
