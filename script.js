@@ -64,7 +64,10 @@ function toggle(index, requires=0, provides=[], negates=[], replaces=[]) {
 		}
 
 		currentPref.classList.remove("true");
-		document.querySelector("#left .img[index=\"" + index +"\"]").remove();
+
+		if (!!document.querySelector(".img[index=\"" + index +"\"]")) {
+			document.querySelector("#left .img[index=\"" + index +"\"]").remove();
+		}
 	}
 }
 
@@ -100,7 +103,15 @@ async function load() {
 		prefRow.innerHTML = e[0];
 		prefRow.setAttribute("onclick", "toggle(" + e[1][0] + ", [" + e[1][1] + "], [" + e[1][2] + "], [" + e[1][3] + "], [" + e[1][4] + "])");
 		console.log("toggle(" + e[1][0] + ", [" + e[1][1] + "], [" + e[1][2] + "], [" + e[1][3] + "], [" + e[1][4] + "])");
+		prefRow.setAttribute("onmouseover", "showDesc(\"" + e[1][0] + "\")");
 		document.querySelector("#pref-list").appendChild(prefRow);
 	}
 }
+
+function showDesc(index) {
+	let currentPref = document.querySelector(".pref:nth-child(" + index + ")");
+
+	document.querySelector("#desc-box").innerHTML = sessionStorage.getItem(currentPref.innerHTML);
+}
+
 load();
