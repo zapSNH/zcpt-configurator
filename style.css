@@ -113,8 +113,7 @@ body {
 	padding: 4px;
 	box-shadow: var(--box-shadow-2);
 	margin-top: 8px;
-	height: 40px;
-	padding-bottom: 1px;
+	height: fit-content;
 }
 #pref-list {
 	background: var(--background-4);
