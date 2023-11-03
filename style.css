@@ -1,4 +1,6 @@
 /* Zap's Cool Photon... Site! */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@1,400..600&display=swap');
+
 :root {
 	--background-1: #f6f6f8;
 	--background-2: #fefefe;
@@ -31,7 +33,7 @@ body {
 	background: var(--background-1);
 	color: var(--color-1);
 	margin: 0;
-	font-family: 'Segoe UI', 'Lato', Tahoma, Geneva, Verdana, sans-serif;
+	font-family: 'Fira Sans', 'Segoe UI', 'Lato', sans-serif;
 	padding: 16px;
 	display: flex;
 	flex-direction: row;
@@ -229,7 +231,7 @@ body {
 	transition: 0.1s;
 	text-decoration: none;
 	text-align: center;
-	font-family: 'Segoe UI', 'Lato', Tahoma, Geneva, Verdana, sans-serif;
+	font-family: 'Fira Sans', 'Segoe UI', 'Lato', sans-serif;
 	display: flex;
 	font-weight: 600;
 }
