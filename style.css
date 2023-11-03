@@ -14,9 +14,6 @@
 	--box-shadow-2: 0 2px 6px #0003;
 	--box-shadow-3: 0 2px 4px #0001;
 }
-#check {
-	filter: invert(1);
-}
 @media (prefers-color-scheme: dark) {
 	:root {
 		--background-1: #0c0c0d;
@@ -28,9 +25,6 @@
 		--color-1: #fefefe;
 	
 		--border-1: #5a5a5c;
-	}
-	#check {
-		filter: invert(0);
 	}
 }
 body {
@@ -134,9 +128,45 @@ body {
 	margin-top: 8px;
 	height: 300px;
 	overflow: scroll;
+	display: flex;
+	flex-direction: column;
 }
+#desc-name {
+	background: var(--background-2);
+	border-radius: 2px;
+	padding: 8px;
+	box-shadow: var(--box-shadow-3);
+	margin: 6px;
+	width: fit-content;
+	font-family: monospace;
+}
+
+#incompat-box {
+	background: var(--background-2);
+	color: var(--color-1);
+	outline: none;
+	color: #eaeaea;
+	border-radius: 2px;
+	padding: 8px;
+	box-shadow: var(--box-shadow-3);
+	margin: 6px;
+	width: fit-content;
+	justify-self: start;
+	transition: 0.2s;
+}
+
+#incompat-box.empty {
+	font-style: italic;
+	opacity: 0.5;
+}
+
+#incompat-box div {
+	font-family: monospace;
+}
+
 #desc-box {
 	margin: 8px;
+	flex: 1;
 }
 .pref {
 	padding: 4px;
@@ -148,11 +178,11 @@ body {
 .pref:nth-child(2n) {
 	background: var(--background-4);
 }
-:is(#export, .pref, #includeInstallation button):hover {
+:is(#export, .pref, #includeInstallation button, #clear):hover {
 	box-shadow: var(--box-shadow-2);
 	z-index: 1;
 }
-:is(#export, .pref, #includeInstallation button):active {
+:is(#export, .pref, #includeInstallation button, #clear):active {
 	box-shadow: var(--box-shadow-3);
 	translate: 0 2px;
 }
@@ -160,8 +190,12 @@ body {
 	background: var(--background-5) !important;
 	font-weight: 500;
 }
+#includeInstallation button.true {
+	background: #0a84ff !important;
+	color: #eaeaea;
+}
 
-#export {
+#export, #clear {
 	border-radius: 2px;
 	background: #0a84ff;
 	border: none;
@@ -170,9 +204,17 @@ body {
 	padding: 8px;
 	font-size: 16px;
 	transition: 0.1s;
-	margin-top: 8px;
 	text-decoration: none;
 	text-align: center;
+	flex: 1;
+	user-select: none;
+}
+#clear {
+	background: var(--background-4) !important;
+	color: var(--color-1);
+}
+#clear:hover:not(:active) {
+	background: var(--background-3) !important;
 }
 #export:hover:not(:active) {
 	background: #57abff;
@@ -209,4 +251,17 @@ button.true #check {
 	margin-right: 8px;
 	margin-left: 2px;
 	border-radius: 2px;
+}
+
+#button-box {
+	width: 100%;
+	height: 37px;
+	margin-top: 8px;
+	align-items: center;
+	display: flex;
+	gap: 8px;
+}
+
+.warning {
+	opacity: 0.5;
 }

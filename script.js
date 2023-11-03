@@ -1,6 +1,7 @@
 // do not look inside, you have been warned
 // please, you will be scarred for life
 // please make sure an emergency line is with you while ya look at this ok?
+// p.s. this is NOT EDIBLE spaghetto code
 // /s
 
 let imgPath = "./images/light/";
@@ -8,8 +9,20 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
 	imgPath = "./images/dark/";
 }
 
-/*index, requires=0, provides=[], negates=[], replaces=[]*/
-function toggle(e) {
+document.querySelector("#includeInstallation button").addEventListener("click", function () {
+	if (!this.classList.contains("true")) {
+		this.classList.add("true");
+	} else {
+		this.classList.remove("true");
+	}
+});
+
+document.querySelector("#clear").addEventListener("click", function () {
+	document.querySelectorAll(".true:not(button)").forEach((e) => e.classList.remove("true"));
+	document.querySelectorAll(".img").forEach((e) => e.remove());
+});
+
+function toggle() {
 	let index = this.index;
 	let requires = this.requires;
 	let provides = this.provides;
@@ -17,15 +30,25 @@ function toggle(e) {
 	let replaces = this.replaces;
 
 	if (!this.classList.contains("true")) {
+
+		this.classList.add("true");
+
+		if (this.classList.contains("warning")) {
+			this.classList.remove("warning");
+		}
+
 		if (requires != 0) {
 			document.querySelector(".pref:nth-child(" + requires + ")").classList.add("true");
+			document.querySelector(".pref:nth-child(" + requires + ")").classList.remove("warning");
 		}
 		if (negates != []) {
 			for(i = 1; i <= negates.length; i++) {
 				document.querySelector(".pref:nth-child(" + negates[i-1] + ")").classList.remove("true");
+				document.querySelector(".pref:nth-child(" + negates[i-1] + ")").classList.add("warning");
 				if (document.querySelector(".img[index=\"" + negates[i-1] +"\"]")) {
 					document.querySelector(".img[index=\"" + negates[i-1] +"\"]").remove();
 				}
+				refreshWarnings();
 			}
 		}
 		if (replaces != []) {
@@ -35,8 +58,7 @@ function toggle(e) {
 				}
 			}
 		}
-		this.classList.add("true");
-
+		
 		let img = document.createElement("img");
 		let imgContainer = document.createElement("div");
 		imgContainer.innerHTML = this.innerHTML;
@@ -44,15 +66,24 @@ function toggle(e) {
 		imgContainer.setAttribute("index", index);
 		img.setAttribute("src", imgPath + this.innerHTML + ".png");
 		imgContainer.appendChild(img);
-		document.querySelector("#left").appendChild(imgContainer);
+		document.querySelector("#left").prepend(imgContainer);
+
 	} else {
+		this.classList.remove("true");
+
 		if (provides != []) {
-			for(i = 1; i <= provides.length; i++) {
+			for (i = 1; i <= provides.length; i++) {
 				document.querySelector(".pref:nth-child(" + provides[i-1] + ")").classList.remove("true");
+				console.log(document.querySelector(".pref:nth-child(" + provides[i-1] + ")"));
 				if (document.querySelector(".img[index=\"" + provides[i-1] +"\"]")) {
 					document.querySelector(".img[index=\"" + provides[i-1] +"\"]").remove();
 				}
+				refreshWarnings();
 			}
+		}
+		
+		if (negates != []) {
+			refreshWarnings();
 		}
 
 		if (replaces != []) {
@@ -64,11 +95,9 @@ function toggle(e) {
 				imgContainer.setAttribute("index", replaces[i-1]);
 				img.setAttribute("src", imgPath + document.querySelector(".pref:nth-child(" + replaces[i-1] + ")").innerHTML + ".png");
 				imgContainer.appendChild(img);
-				document.querySelector("#left").appendChild(imgContainer);
+				document.querySelector("#left").prepend(imgContainer);
 			}
 		}
-
-		this.classList.remove("true");
 
 		if (document.querySelector(".img[index=\"" + index +"\"]")) {
 			document.querySelector("#left .img[index=\"" + index +"\"]").remove();
@@ -76,24 +105,14 @@ function toggle(e) {
 	}
 }
 
-function includeInstallation() {
-	if (!document.querySelector("#includeInstallation button").classList.contains("true")) {
-		document.querySelector("#includeInstallation button").classList.add("true");
-	} else {
-		document.querySelector("#includeInstallation button").classList.remove("true");
+function refreshWarnings() {
+	for (let e of document.querySelectorAll(".warning")) {
+		let canBeRemoved = true;
+		for (let f of document.querySelectorAll(".true:not(button)")) {
+			if (e.negates.includes(f.index)) canBeRemoved = false;
+		}
+		if (canBeRemoved) e.classList.remove("warning");
 	}
-}
-
-function exportPrefs() {
-	let exported = "// Put this in your profile folder and delete it after you start Firefox\n";
-
-	if (document.querySelector("#includeInstallation button").classList.contains("true")) {
-		exported = "// Put this in your profile folder and delete it after you start Firefox\nuser_pref(\"toolkit.legacyUserProfileCustomizations.stylesheets\", true);\nuser_pref(\"svg.context-properties.content.enabled\", true);\nuser_pref(\"layout.css.has-selector.enabled\", true);\nuser_pref(\"browser.newtabpage.activity-stream.logowordmark.alwaysVisible\", true);\n";
-	}
-
-	document.querySelectorAll(".true:not(button)").forEach((e) => exported = exported.concat("user_pref(\"" + e.innerHTML + "\", true);\n"));
-	console.log(exported);
-	document.querySelector("#export").href = "data:text/plain," + encodeURIComponent(exported);
 }
 
 async function load() {
@@ -113,9 +132,46 @@ async function load() {
 		prefRow.addEventListener("click", toggle);
 		prefRow.addEventListener("mouseover", function () {
 			document.querySelector("#desc-box").innerHTML = this.desc;
+			document.querySelector("#desc-name").innerHTML = this.innerHTML;
+			let incompatibilities = "";
+			this.negates.forEach(function (e) {
+				incompatibilities += document.querySelector(".pref:nth-child(" + e + ")").innerHTML + "<br>";
+			});
+			if (incompatibilities == "") {
+				document.querySelector("#incompat-box div").innerHTML = "N/A";
+				document.querySelector("#incompat-box").classList.add("empty");
+			} else {
+				document.querySelector("#incompat-box div").innerHTML = incompatibilities;
+				document.querySelector("#incompat-box").classList.remove("empty");
+			}
 		});
 		document.querySelector("#pref-list").appendChild(prefRow);
 	}
+
+	document.querySelector("#export").addEventListener("click", function () {
+		let exported = "// Put this in your profile folder and delete it after you start Firefox\n";
+		fetch("defaultPrefs.json")
+			.then((response) => {
+				return response.json();
+			})
+			.then((data) => {
+				let link = document.createElement("a");
+				if (document.querySelector("#includeInstallation button").classList.contains("true")) {	
+					for (let e of data.defaultPrefs) {
+						exported += e + "\n";
+					}
+		
+					exported += "\n";
+				}
+				document.querySelectorAll(".true:not(button)").forEach((e) => exported = exported.concat("user_pref(\"" + e.innerHTML + "\", true);\n"));
+				link.href = "data:text/plain," + encodeURIComponent(exported);
+				link.download = "user.js";
+				link.click();
+			})
+			.catch((error) => {
+				console.log("error " + error);
+			});
+	});
 }
 
 load();

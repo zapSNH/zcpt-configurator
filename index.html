@@ -11,7 +11,7 @@
 	<div id="sidebar">
 		<div id="title"><img id="fav" src="./images/favicon.svg"><a href="https://github.com/zapSNH/zapsCoolPhotonTheme">zapSNH/zapsCoolPhotonTheme</a> Option Site</div>
 		<div id="includeInstallation">
-			<button onclick="includeInstallation()">
+			<button>
 				<img id="check" src="./images/check.svg">
 				Include preferences for theme installation
 			</button>
@@ -19,11 +19,21 @@
 		<div id="pref-list">
 		</div>
 		<div id="description">
+			<div id="desc-name">
+				Hover over an item to see its description
+			</div>
 			<div id="desc-box">
-				
+				Click on an item to select it
+			</div>
+			<div id="incompat-box" class="empty">
+				Incompatible with:
+				<div>N/A</div>
 			</div>
 		</div>
-		<a id="export" download="user.js" onclick="exportPrefs()">Export Options</a>
+		<div id="button-box">
+			<a id="clear">Clear Options</a>
+			<a id="export">Export Options</a>
+		</div>
 	</div>
 	<div id="left"></div>
 	<script src="script.js"></script>
