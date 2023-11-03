@@ -145,7 +145,6 @@ body {
 	background: var(--background-2);
 	color: var(--color-1);
 	outline: none;
-	color: #eaeaea;
 	border-radius: 2px;
 	padding: 8px;
 	box-shadow: var(--box-shadow-3);

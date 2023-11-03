@@ -75,7 +75,6 @@ function toggle() {
 		if (provides != []) {
 			for (i = 1; i <= provides.length; i++) {
 				document.querySelector(".pref:nth-child(" + provides[i-1] + ")").classList.remove("true");
-				console.log(document.querySelector(".pref:nth-child(" + provides[i-1] + ")"));
 				if (document.querySelector(".img[index=\"" + provides[i-1] +"\"]")) {
 					document.querySelector(".img[index=\"" + provides[i-1] +"\"]").remove();
 				}
