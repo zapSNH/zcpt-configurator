@@ -51,6 +51,8 @@ body {
 	height: calc(100vh - 64px);
 	margin-right: 16px;
 }
+
+/* i see backwards ok? */
 #left {
 	display: flex;
 	flex-direction: column;
@@ -172,6 +174,9 @@ body {
 #desc-box {
 	margin: 8px;
 	flex: 1;
+	overflow-y: scroll;
+	scrollbar-width: thin;
+	scrollbar-color: var(--border-1) var(--background-4);
 }
 .pref {
 	padding: 4px;
