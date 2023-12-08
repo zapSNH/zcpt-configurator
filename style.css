@@ -26,6 +26,9 @@
 	
 		--border-1: #5a5a5c;
 	}
+	#fav {
+		content: url(./images/icon-dark.svg) !important;
+	}
 }
 body {
 	background: var(--background-1);

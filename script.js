@@ -7,6 +7,7 @@
 let imgPath = "./images/light/";
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
 	imgPath = "./images/dark/";
+	document.querySelector(".favicon").href = "./images/icon-dark.svg";
 }
 
 document.querySelector("#includeInstallation button").addEventListener("click", function () {
