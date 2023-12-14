@@ -26,7 +26,7 @@
 	
 		--border-1: #5a5a5c;
 	}
-	#fav {
+	#fav, #select-container img {
 		content: url(./images/icon-dark.svg) !important;
 	}
 }
@@ -279,6 +279,25 @@ button.true #check {
 	opacity: 0.5;
 }
 
+#select-container {
+	filter: grayscale(1);
+	opacity: 0.5;
+	transition: 0.2s;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	font-weight: 600;
+	font-size: larger;
+	pointer-events: none;
+	user-select: none;
+}
+#select-container div {
+	margin-top: 8px;
+}
+.img + #select-container {
+	display: none;
+}
 /* reshponivv! */
 @media (max-width: 900px) {
 	body {
