@@ -14,6 +14,7 @@
 		["uc.contextmenu.dark",	 				[12, 0, [], [13], []],			"Dark context menu w/ Windows 10/11 styled context menu"],
 		["uc.contextmenu.light",				[13, 0, [], [12], []],			"Light context menu w/ Windows 10/11 styled context menu"],
 		["uc.newtab.background",				[14, 0, [], [], []],			"New tab background"],
-		["uc.full-width-tabs",					[15, 0, [], [], []],			"Full width tabs<br><br>Can be coupled with <code>uc.bottom-tabs</code> if you want the <i>Safari</i> look.<br><i style=\"opacity: 0.5;\" title=\"i usually don't judge people based on their design preferences but... why?\">(on a Photon theme you maniac)</i>"]	
+		["uc.full-width-tabs",					[15, 0, [], [], []],			"Full width tabs<br><br>Can be coupled with <code>uc.bottom-tabs</code> if you want the <i>Safari</i> look.<br><i style=\"opacity: 0.5;\" title=\"i usually don't judge people based on their design preferences but... why?\">(on a Photon theme you maniac)</i>"],
+		["uc.style-forms",					[16, 0, [], [], []],			"Themes HTML Forms. May break some stuff."]
 	]
 }
