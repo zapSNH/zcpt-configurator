@@ -30,6 +30,15 @@
 		content: url(./images/icon-dark.svg) !important;
 	}
 }
+
+@media (prefers-reduced-motion) {
+	* {
+		transition-duration: 0s !important;
+		&:active {
+			translate: 0 !important;
+		}
+	}
+}
 body {
 	background: var(--background-1);
 	color: var(--color-1);
