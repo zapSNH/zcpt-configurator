@@ -1,8 +1,7 @@
 // do not look inside, you have been warned
 // please, you will be scarred for life
-// please make sure an emergency line is with you while ya look at this ok?
 // p.s. this is NOT EDIBLE spaghetto code
-// /s
+// :(
 
 let imgPath = "./images/light/";
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
