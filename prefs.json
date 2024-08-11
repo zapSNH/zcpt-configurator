@@ -19,6 +19,6 @@
 		["uc.logo.quantum",						[17, 0, [18, 19, 20], [], []],	"Use the pre-Firefox 70 quantum logo everywhere instead of the current one."],
 		["uc.logo.quantum.beta",				[18, 17, [], [19, 20], []],		"Use the Firefox quantum beta logo everywhere."],
 		["uc.logo.quantum.dev",					[19, 17, [], [18, 20], []],		"Use the Firefox quantum developer edition logo everywhere."],
-		["uc.logo.quantum.nightly",				[10, 17, [], [18, 19], []],		"Use the Firefox quantum nightly logo everywhere."]
+		["uc.logo.quantum.nightly",				[20, 17, [], [18, 19], []],		"Use the Firefox quantum nightly logo everywhere."]
 	]
 }
