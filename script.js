@@ -22,7 +22,12 @@ document.querySelector("#clear").addEventListener("click", function () {
 	document.querySelectorAll(".warning").forEach((e) => e.classList.remove("warning"));
 	document.querySelectorAll(".img").forEach((e) => e.remove());
 });
-
+// https://stackoverflow.com/a/43321596
+document.addEventListener('mousedown', function(event) {
+	if (event.detail > 1) {
+		event.preventDefault();
+	}
+}, false);
 function toggle() {
 	let index = this.index;
 	let requires = this.requires;
@@ -40,68 +45,72 @@ function toggle() {
 			document.querySelector(".pref:nth-child(" + requires + ")").classList.add("true");
 			document.querySelector(".pref:nth-child(" + requires + ")").classList.remove("warning");
 		}
-		if (negates != []) {
+		if (negates.length) {
 			for(i = 1; i <= negates.length; i++) {
 				document.querySelector(".pref:nth-child(" + negates[i-1] + ")").classList.remove("true");
 				document.querySelector(".pref:nth-child(" + negates[i-1] + ")").classList.add("warning");
 				if (document.querySelector(".img[index=\"" + negates[i-1] +"\"]")) document.querySelector(".img[index=\"" + negates[i-1] +"\"]").remove();
-
-				refreshWarnings();
 			}
 		}
-		if (replaces != []) {
+		if (replaces.length) {
 			for(i = 1; i <= replaces.length; i++) {
 				if (document.querySelector(".img[index=\"" + replaces[i-1] +"\"]")) document.querySelector(".img[index=\"" + replaces[i-1] +"\"]").remove();
 			}
 		}
-		
-		let img = document.createElement("img");
-		let imgContainer = document.createElement("div");
-		imgContainer.innerHTML = this.innerHTML;
-		imgContainer.classList.add("img");
-		imgContainer.setAttribute("index", index);
-		img.setAttribute("src", imgPath + this.innerHTML + ".png");
-		imgContainer.appendChild(img);
-		document.querySelector("#left").prepend(imgContainer);
+		createPreview(this.textContent, index, replaces);
 
 	} else {
 		this.classList.remove("true");
 
-		if (provides != []) {
+		if (provides.length) {
 			for (i = 1; i <= provides.length; i++) {
 				document.querySelector(".pref:nth-child(" + provides[i-1] + ")").classList.remove("true");
 				if (document.querySelector(".img[index=\"" + provides[i-1] +"\"]")) document.querySelector(".img[index=\"" + provides[i-1] +"\"]").remove();
 				refreshWarnings();
 			}
 		}
-		
-		if (negates != []) refreshWarnings();
 
-
-		if (replaces != []) {
+		if (replaces.length) {
 			for (i = 1; i <= replaces.length; i++) {
-				let img = document.createElement("img");
-				let imgContainer = document.createElement("div");
-				imgContainer.innerHTML = document.querySelector(".pref:nth-child(" + replaces[i-1] + ")").innerHTML;
-				imgContainer.classList.add("img");
-				imgContainer.setAttribute("index", replaces[i-1]);
-				img.setAttribute("src", imgPath + document.querySelector(".pref:nth-child(" + replaces[i-1] + ")").innerHTML + ".png");
-				imgContainer.appendChild(img);
-				document.querySelector("#left").prepend(imgContainer);
+				createPreview(document.querySelector(".pref:nth-child(" + replaces[i-1] + ")").textContent, replaces[i-1], replaces);
 			}
 		}
 
 		if (document.querySelector(".img[index=\"" + index +"\"]")) document.querySelector("#left .img[index=\"" + index +"\"]").remove();
 	}
+	refreshWarnings();
 }
-
-function refreshWarnings() {
-	for (let e of document.querySelectorAll(".warning")) {
-		let canBeRemoved = true;
-		for (let f of document.querySelectorAll(".true:not(button)")) {
-			if (e.negates.includes(f.index)) canBeRemoved = false;
+function createPreview(name, index, replaces) {
+	let img = document.createElement("img");
+	let imgContainer = document.createElement("div");
+	let imgLabel = document.createElement("span");
+	imgLabel.innerHTML = name;
+	imgContainer.classList.add("img");
+	imgContainer.setAttribute("index", index);
+	img.setAttribute("src", imgPath + name + ".png");
+	imgContainer.appendChild(imgLabel);
+	if (replaces.length) {
+		for (i = 1; i <= replaces.length; i++) {
+			let imgLabelExtra = document.createElement("span");
+			if (document.querySelector(".pref:nth-child(" + replaces[i-1] + ")").innerHTML == imgLabel.innerHTML) {
+				continue;
+			}
+			imgLabelExtra.innerHTML = " + " + document.querySelector(".pref:nth-child(" + replaces[i-1] + ")").textContent;
+			imgLabelExtra.classList.add("extra");
+			imgContainer.appendChild(imgLabelExtra);
 		}
-		if (canBeRemoved) e.classList.remove("warning");
+	}
+	imgContainer.appendChild(img);
+	document.querySelector("#left").prepend(imgContainer);
+}
+function refreshWarnings() {
+	for (let e of document.querySelectorAll(".pref")) {
+		let hasWarning = false;
+		for (let f of document.querySelectorAll(".true:not(button)")) {
+			if (f.negates.includes(e.index)) hasWarning = true;
+		}
+		if (hasWarning) e.classList.add("warning");
+		if (!hasWarning) e.classList.remove("warning");
 	}
 }
 
@@ -121,18 +130,25 @@ async function load() {
 		prefRow.desc = e[2];
 		prefRow.addEventListener("click", toggle);
 		prefRow.addEventListener("mouseover", function () {
-			document.querySelector("#desc-box").innerHTML = this.desc;
-			document.querySelector("#desc-name").innerHTML = this.innerHTML;
+			document.querySelector("#desc-box").textContent = this.desc;
+			document.querySelector("#desc-name").textContent = this.textContent;
 			let incompatibilities = "";
-			this.negates.forEach((e) => incompatibilities += document.querySelector(".pref:nth-child(" + e + ")").innerHTML + "<br>");
+			this.negates.forEach((e) => incompatibilities += document.querySelector(".pref:nth-child(" + e + ")").textContent + "<br>");
 			if (incompatibilities == "") {
-				document.querySelector("#incompat-box div").innerHTML = "N/A";
+				document.querySelector("#incompat-box div").textContent = "N/A";
 				document.querySelector("#incompat-box").classList.add("empty");
 			} else {
-				document.querySelector("#incompat-box div").innerHTML = incompatibilities;
+				document.querySelector("#incompat-box div").textContent = incompatibilities;
 				document.querySelector("#incompat-box").classList.remove("empty");
 			}
 		});
+		let copyButton = document.createElement("div");
+		copyButton.classList.add("copy");
+		copyButton.addEventListener("click", function (e) {
+			e.stopPropagation();
+			navigator.clipboard.writeText(prefRow.textContent);
+		});
+		prefRow.append(copyButton);
 		document.querySelector("#pref-list").appendChild(prefRow);
 	}
 
