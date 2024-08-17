@@ -138,7 +138,7 @@ async function load() {
 				document.querySelector("#incompat-box div").textContent = "N/A";
 				document.querySelector("#incompat-box").classList.add("empty");
 			} else {
-				document.querySelector("#incompat-box div").textContent = incompatibilities;
+				document.querySelector("#incompat-box div").innerHTML = incompatibilities;
 				document.querySelector("#incompat-box").classList.remove("empty");
 			}
 		});
