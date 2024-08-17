@@ -72,7 +72,7 @@ function toggle() {
 
 		if (replaces.length) {
 			for (i = 1; i <= replaces.length; i++) {
-				createPreview(document.querySelector(".pref:nth-child(" + replaces[i-1] + ")").textContent, replaces[i-1], replaces);
+				createPreview(document.querySelector(".pref:nth-child(" + replaces[i-1] + ")").textContent, replaces[i-1], document.querySelector(".pref:nth-child(" + replaces[i-1] + ")").replaces);
 			}
 		}
 
