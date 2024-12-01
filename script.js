@@ -167,7 +167,7 @@ async function load() {
 		
 					exported += "\n";
 				}
-				document.querySelectorAll(".true:not(button)").forEach((e) => exported = exported.concat("user_pref(\"" + e.innerHTML + "\", true);\n"));
+				document.querySelectorAll(".true:not(button)").forEach((e) => exported = exported.concat("user_pref(\"" + e.textContent + "\", true);\n"));
 				link.href = "data:text/plain," + encodeURIComponent(exported);
 				link.download = "user.js";
 				link.click();
